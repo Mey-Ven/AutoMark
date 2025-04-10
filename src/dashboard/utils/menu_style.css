@@ -1,0 +1,229 @@
+/* Styles généraux pour le dashboard */
+.main {
+    background-color: var(--background-color, #f5f7fa);
+    color: var(--text-color, #31333F);
+}
+
+/* Styles pour la barre latérale */
+.css-1d391kg, .css-1wrcr25, .st-emotion-cache-1d391kg, .st-emotion-cache-1wrcr25,
+section[data-testid="stSidebar"] {
+    background-color: var(--secondary-background, #1e2a38) !important;
+    color: var(--text-color, #ffffff) !important;
+    padding: 2rem 1rem !important;
+}
+
+/* Titre du menu */
+.css-1d391kg h1, .st-emotion-cache-1d391kg h1,
+section[data-testid="stSidebar"] h1 {
+    color: var(--text-color, #ffffff) !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+}
+
+/* Logo */
+.css-1d391kg img, .st-emotion-cache-1d391kg img {
+    display: block !important;
+    margin: 0 auto 2rem auto !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+    background-color: #ffffff !important;
+    padding: 0.5rem !important;
+}
+
+/* Titre de la navigation */
+.css-1d391kg .stRadio > div:first-child, .st-emotion-cache-1d391kg .stRadio > div:first-child {
+    color: #ffffff !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding-bottom: 0.5rem !important;
+}
+
+/* Styles pour les boutons du menu */
+.css-1d391kg button, .st-emotion-cache-1d391kg button,
+section[data-testid="stSidebar"] button {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.5rem !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.3s ease !important;
+    border-left: 4px solid transparent !important;
+    color: var(--text-color, white) !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+/* Forcer l'alignement à gauche pour les boutons Streamlit */
+.css-1d391kg button p, .st-emotion-cache-1d391kg button p,
+section[data-testid="stSidebar"] button p,
+.css-1d391kg button div, .st-emotion-cache-1d391kg button div,
+section[data-testid="stSidebar"] button div {
+    text-align: left !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Style pour le bouton actif/sélectionné */
+.css-1d391kg button:active, .st-emotion-cache-1d391kg button:active,
+.css-1d391kg button:focus, .st-emotion-cache-1d391kg button:focus,
+section[data-testid="stSidebar"] button:active,
+section[data-testid="stSidebar"] button:focus {
+    background-color: rgba(255, 75, 75, 0.2) !important;
+    border-left: 4px solid var(--accent-color, #FF4B4B) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Hover sur les boutons */
+.css-1d391kg button:hover, .st-emotion-cache-1d391kg button:hover,
+section[data-testid="stSidebar"] button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px) !important;
+    border-left: 4px solid rgba(255, 75, 75, 0.5) !important;
+}
+
+/* Pied de page */
+.css-1d391kg .stMarkdown hr, .st-emotion-cache-1d391kg .stMarkdown hr,
+section[data-testid="stSidebar"] .stMarkdown hr {
+    margin: 2rem 0 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.css-1d391kg .stMarkdown div.stAlert, .st-emotion-cache-1d391kg .stMarkdown div.stAlert,
+section[data-testid="stSidebar"] .stMarkdown div.stAlert {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: var(--text-color, #ffffff) !important;
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Supprimer les styles par défaut des boutons Streamlit */
+button[kind="secondary"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Cibler les styles spécifiques de Streamlit pour les boutons */
+.stButton > button, .stButton > div > button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+/* Cibler les conteneurs de boutons dans la barre latérale */
+section[data-testid="stSidebar"] .stButton,
+section[data-testid="stSidebar"] .stButton > div {
+    width: 100% !important;
+    display: block !important;
+}
+
+/* Ajouter une icône aux boutons du menu */
+.css-1d391kg button::before, .st-emotion-cache-1d391kg button::before,
+section[data-testid="stSidebar"] button::before {
+    content: '\25B8' !important; /* Triangle pointant vers la droite */
+    margin-right: 10px !important;
+    display: inline-block !important;
+    transition: transform 0.3s ease !important;
+    flex-shrink: 0 !important;
+}
+
+.css-1d391kg button:hover::before, .st-emotion-cache-1d391kg button:hover::before,
+section[data-testid="stSidebar"] button:hover::before {
+    transform: translateX(3px) !important;
+}
+
+/* Styles pour les conteneurs principaux */
+.block-container {
+    padding: 2rem !important;
+    max-width: 1200px !important;
+    background-color: var(--background-color, #f5f7fa) !important;
+}
+
+/* Styles pour les titres */
+h1, h2, h3 {
+    color: var(--text-color, #1e2a38) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+h1 {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    border-bottom: 3px solid var(--accent-color, #FF4B4B) !important;
+    padding-bottom: 0.5rem !important;
+    display: inline-block !important;
+}
+
+h2 {
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    color: var(--text-color, #2c3e50) !important;
+}
+
+h3 {
+    font-size: 1.4rem !important;
+    font-weight: 500 !important;
+    color: var(--text-color, #34495e) !important;
+}
+
+/* Styles pour les métriques */
+.stMetric {
+    background-color: var(--card-background, #ffffff) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+    padding: 1.5rem !important;
+    transition: transform 0.3s ease !important;
+}
+
+.stMetric:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stMetric label {
+    font-weight: 600 !important;
+    color: var(--text-color, #2c3e50) !important;
+    font-size: 1.1rem !important;
+}
+
+.stMetric .css-1wivap2, .stMetric .st-emotion-cache-1wivap2 {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: var(--accent-color, #FF4B4B) !important;
+}
+
+/* Animation pour le logo */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.css-1d391kg img:hover, .st-emotion-cache-1d391kg img:hover {
+    animation: pulse 1.5s infinite;
+}

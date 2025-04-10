@@ -1,0 +1,12 @@
+[pages]
+# Renommer les pages pour qu'elles apparaissent en français
+"src/dashboard/app.py" = "Accueil"
+"src/dashboard/pages_streamlit/1_Statistiques_de_présence.py" = "Statistiques de présence"
+"src/dashboard/pages_streamlit/2_Détails_des_étudiants.py" = "Détails des étudiants"
+"src/dashboard/pages_streamlit/3_Rapports.py" = "Rapports"
+
+# Cacher les autres pages
+"src/dashboard/pages/home.py" = false
+"src/dashboard/pages/attendance_stats.py" = false
+"src/dashboard/pages/student_details.py" = false
+"src/dashboard/pages/reports.py" = false

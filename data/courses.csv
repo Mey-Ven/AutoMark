@@ -1,0 +1,6 @@
+CourseID,CourseName,Instructor,Group,Schedule
+MATH101,Mathématiques 101,Prof. Dupont,Groupe A,Lundi 09:00-11:00
+PHYS201,Physique 201,Prof. Martin,Groupe A,Mardi 14:00-16:00
+INFO301,Informatique 301,Prof. Dubois,Groupe B,Mercredi 10:00-12:00
+CHEM101,Chimie 101,Prof. Leroy,Groupe B,Jeudi 13:00-15:00
+ENG201,Anglais 201,Prof. Smith,Groupe A,Vendredi 11:00-13:00

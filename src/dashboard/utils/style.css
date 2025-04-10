@@ -1,0 +1,51 @@
+/* Masquer le menu principal de Streamlit */
+#MainMenu {visibility: hidden !important;}
+footer {visibility: hidden !important;}
+header {visibility: hidden !important;}
+.stDeployButton {display: none !important;}
+
+/* Masquer spécifiquement le menu du haut avec les liens en anglais */
+.main-nav {display: none !important;}
+nav {display: none !important;}
+.css-1d391kg {display: none !important;}
+.css-1lsmgbg {display: none !important;}
+
+/* Masquer tous les éléments de navigation en haut */
+[data-testid="stAppViewBlockContainer"] > div:first-child {display: none !important;}
+.stApp > header {display: none !important;}
+.stApp > div:first-child {display: none !important;}
+
+/* Masquer les autres éléments non désirés */
+div[data-testid="stToolbar"] {visibility: hidden !important;}
+div[data-testid="stDecoration"] {visibility: hidden !important;}
+div[data-testid="stStatusWidget"] {visibility: hidden !important;}
+#root > div:nth-child(1) > div > div > div > div:nth-child(1) {visibility: hidden !important; height: 0px !important;}
+
+/* Masquer les onglets en haut */
+.stTabs [data-baseweb="tab-list"] {display: none !important;}
+.stTabs [data-baseweb="tab-border"] {display: none !important;}
+
+/* Masquer le menu de navigation horizontal */
+.css-1rs6os {display: none !important;}
+.css-17ziqus {display: none !important;}
+.css-1oe6wy4 {display: none !important;}
+
+/* Masquer les éléments spécifiques du menu en anglais */
+a[href="app"], a[href="attendance_stats"], a[href="home"], a[href="init"], a[href="reports"], a[href="student_details"] {
+    display: none !important;
+}
+
+/* Masquer le conteneur parent des liens en anglais */
+div:has(> a[href="app"]) {
+    display: none !important;
+}
+
+/* Masquer le menu de navigation horizontal complet */
+.st-emotion-cache-1cypcdb {
+    display: none !important;
+}
+
+/* Masquer tous les éléments de navigation sauf notre barre latérale personnalisée */
+nav:not(.st-emotion-cache-16txtl3) {
+    display: none !important;
+}
