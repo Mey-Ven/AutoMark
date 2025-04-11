@@ -1,0 +1,8 @@
+UserID,EntityID,EntityType
+U002,MATH101,course
+U002,ENG201,course
+U003,PHYS201,course
+U004,INFO301,course
+U004,CHEM101,course
+U005,S001,student
+U006,S002,student

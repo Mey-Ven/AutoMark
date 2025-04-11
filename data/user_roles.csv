@@ -1,0 +1,4 @@
+Role,Description,Permissions
+admin,Administrateur système,"manage_users,manage_courses,manage_students,view_all_reports,manage_settings"
+teacher,Enseignant,"view_own_courses,take_attendance,view_own_reports,train_recognition"
+student,Étudiant,"view_own_attendance,view_own_schedule"

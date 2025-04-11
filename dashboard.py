@@ -11,7 +11,15 @@ from src.dashboard.pages.attendance_stats import render_attendance_stats_page
 from src.dashboard.pages.student_details import render_student_details_page
 from src.dashboard.pages.reports import render_reports_page
 from src.dashboard.pages.admin import render_admin_page
+from src.dashboard.pages.face_recognition import render_face_recognition_page
 from src.dashboard.utils.plotly_config import apply_french_layout
+
+# Importer les modules d'authentification et les interfaces spécifiques par rôle
+from src.auth import AuthManager
+from src.dashboard.pages.login import render_login_page, check_authentication, logout
+from src.dashboard.pages.admin_home import render_admin_home
+from src.dashboard.pages.teacher_home import render_teacher_home
+from src.dashboard.pages.student_home import render_student_home
 
 # Configuration de la page
 st.set_page_config(
@@ -112,14 +120,52 @@ else:
 # Appliquer le thème
 st.markdown(theme_css, unsafe_allow_html=True)
 
-# Menu de navigation
-pages = {
-    "Accueil": render_home_page,
-    "Statistiques de présence": render_attendance_stats_page,
-    "Détails des étudiants": render_student_details_page,
-    "Rapports": render_reports_page,
-    "Administration": render_admin_page
-}
+# Initialiser le gestionnaire d'authentification
+auth_manager = AuthManager(data_dir)
+
+# Vérifier si l'utilisateur est authentifié
+user_info = check_authentication()
+
+# Si l'utilisateur n'est pas authentifié, afficher la page de connexion
+if not user_info:
+    render_login_page(auth_manager)
+    st.stop()  # Arrêter l'exécution pour ne pas afficher le reste de l'interface
+
+# Menu de navigation en fonction du rôle de l'utilisateur
+role = user_info['role']
+
+if role == 'admin':
+    pages = {
+        "Accueil Admin": lambda dl: render_admin_home(dl, auth_manager),
+        "Statistiques de présence": render_attendance_stats_page,
+        "Détails des étudiants": render_student_details_page,
+        "Rapports": render_reports_page,
+        "Administration": render_admin_page,
+        "Reconnaissance Faciale": render_face_recognition_page,
+        "Déconnexion": lambda dl: logout()
+    }
+elif role == 'teacher':
+    pages = {
+        "Accueil Enseignant": lambda dl: render_teacher_home(dl, auth_manager),
+        "Statistiques de présence": render_attendance_stats_page,
+        "Détails des étudiants": render_student_details_page,
+        "Rapports": render_reports_page,
+        "Reconnaissance Faciale": render_face_recognition_page,
+        "Déconnexion": lambda dl: logout()
+    }
+elif role == 'student':
+    pages = {
+        "Accueil Étudiant": lambda dl: render_student_home(dl, auth_manager),
+        "Mon emploi du temps": render_home_page,
+        "Mes présences": render_attendance_stats_page,
+        "Déconnexion": lambda dl: logout()
+    }
+else:
+    # Rôle inconnu, afficher un menu limité
+    pages = {
+        "Accueil": render_home_page,
+        "Déconnexion": lambda dl: logout()
+    }
 
 # Sélecteur de page avec un style amélioré
 st.sidebar.markdown("### Navigation")
@@ -159,9 +205,10 @@ for page in pages.keys():
         selection = page
         st.session_state.page_selection = page
 
-# Si aucun bouton n'est cliqué, utiliser la page d'accueil par défaut
+# Si aucun bouton n'est cliqué, utiliser la première page du menu comme page par défaut
 if selection is None:
-    selection = "Accueil"
+    # Sélectionner la première page du dictionnaire en fonction du rôle
+    selection = list(pages.keys())[0]
 
 # Ajouter une animation de transition entre les pages
 st.markdown("""
@@ -225,6 +272,7 @@ if st.sidebar.button(theme_button_label, key="theme_toggle_btn", use_container_w
     st.session_state.dark_mode = not dark_mode
     # Recharger l'application pour appliquer le nouveau thème
     st.rerun()
+
 
 # Informations sur l'application
 st.sidebar.markdown("""
