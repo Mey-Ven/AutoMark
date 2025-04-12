@@ -10,7 +10,7 @@ from src.dashboard.pages.home import render_home_page
 from src.dashboard.pages.attendance_stats import render_attendance_stats_page
 from src.dashboard.pages.student_details import render_student_details_page
 from src.dashboard.pages.reports import render_reports_page
-from src.dashboard.pages.admin import render_admin_page
+from src.dashboard.pages.admin_improved import render_admin_page
 from src.dashboard.pages.face_recognition import render_face_recognition_page
 from src.dashboard.utils.plotly_config import apply_french_layout
 

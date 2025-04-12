@@ -1,7 +1,7 @@
-UserID,Username,PasswordHash,Role,FirstName,LastName,Email,LastLogin
-U001,admin,8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918,admin,Admin,Système,admin@automark.fr,2025-04-11 16:46:38
-U002,prof_dupont,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Dupont,dupont@automark.fr,2023-09-01 09:00:00
-U003,prof_martin,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Martin,martin@automark.fr,2023-09-01 10:00:00
-U004,prof_dubois,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Dubois,dubois@automark.fr,2023-09-01 11:00:00
-U005,jean_dupont,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,student,Jean,Dupont,jean.dupont@etudiant.fr,2023-09-01 12:00:00
-U006,marie_martin,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,student,Marie,Martin,marie.martin@etudiant.fr,2023-09-01 13:00:00
+UserID,Username,PasswordHash,Role,FirstName,LastName,Email,LastLogin,FailedAttempts
+U001,admin,8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918,admin,Admin,Système,admin@automark.fr,2025-04-12 21:30:02,0.0
+U002,prof_dupont,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Dupont,dupont@automark.fr,2023-09-01 09:00:00,
+U003,prof_martin,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Martin,martin@automark.fr,2023-09-01 10:00:00,
+U004,prof_dubois,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,teacher,Prof.,Dubois,dubois@automark.fr,2023-09-01 11:00:00,
+U005,jean_dupont,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,student,Jean,Dupont,jean.dupont@etudiant.fr,2023-09-01 12:00:00,
+U006,marie_martin,a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3,student,Marie,Martin,marie.martin@etudiant.fr,2023-09-01 13:00:00,

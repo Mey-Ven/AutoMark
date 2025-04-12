@@ -4,6 +4,8 @@ from datetime import datetime
 import pickle
 import time
 import random
+import functools
+import hashlib
 from typing import List, Dict, Tuple, Optional, Union
 
 # Import des dépendances optionnelles
@@ -24,6 +26,53 @@ except ImportError as e:
     FACE_RECOGNITION_AVAILABLE = False
     print("face_recognition n'est pas disponible. Utilisation d'OpenCV uniquement.")
 
+# Décorateur pour mettre en cache les résultats des fonctions
+def cache_result(max_size=100, ttl=3600):
+    """
+    Décorateur pour mettre en cache les résultats des fonctions.
+
+    Args:
+        max_size: Taille maximale du cache
+        ttl: Durée de vie des entrées en secondes
+    """
+    cache = {}
+    timestamps = {}
+    keys_queue = []
+
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            # Générer une clé unique pour les arguments
+            key_parts = [func.__name__]
+            key_parts.extend([str(arg) for arg in args])
+            key_parts.extend([f"{k}={v}" for k, v in sorted(kwargs.items())])
+            key = hashlib.md5("|".join(key_parts).encode()).hexdigest()
+
+            # Vérifier si le résultat est dans le cache et n'est pas expiré
+            current_time = time.time()
+            if key in cache and current_time - timestamps[key] < ttl:
+                return cache[key]
+
+            # Calculer le résultat
+            result = func(*args, **kwargs)
+
+            # Mettre à jour le cache
+            if len(keys_queue) >= max_size:
+                # Supprimer l'entrée la plus ancienne
+                old_key = keys_queue.pop(0)
+                if old_key in cache:
+                    del cache[old_key]
+                    del timestamps[old_key]
+
+            # Ajouter la nouvelle entrée
+            cache[key] = result
+            timestamps[key] = current_time
+            keys_queue.append(key)
+
+            return result
+        return wrapper
+    return decorator
+
 class FaceRecognitionModule:
     """
     Module avancé de reconnaissance faciale pour AutoMark.
@@ -43,10 +92,12 @@ class FaceRecognitionModule:
         self.photos_dir = os.path.join(data_dir, 'photos')
         self.encodings_file = os.path.join(data_dir, 'face_encodings.pkl')
         self.training_dir = os.path.join(data_dir, 'training_photos')
+        self.cache_dir = os.path.join(data_dir, 'cache')
 
         # Créer les répertoires s'ils n'existent pas
         os.makedirs(self.photos_dir, exist_ok=True)
         os.makedirs(self.training_dir, exist_ok=True)
+        os.makedirs(self.cache_dir, exist_ok=True)
 
         # Initialiser le détecteur de visage avec OpenCV
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -601,6 +652,7 @@ class FaceRecognitionModule:
 
         return results
 
+    @cache_result(max_size=50, ttl=60)  # Cache les résultats pendant 60 secondes
     def recognize_faces(self, image) -> Dict:
         """
         Reconnaît les visages dans une image.
@@ -611,6 +663,22 @@ class FaceRecognitionModule:
         Returns:
             Dictionnaire avec les résultats de reconnaissance
         """
+        # Générer un identifiant unique pour l'image pour le cache sur disque
+        image_hash = hashlib.md5(image.tobytes()).hexdigest()
+        cache_file = os.path.join(self.cache_dir, f"recognition_{image_hash}.pkl")
+
+        # Vérifier si le résultat est déjà en cache sur disque
+        if os.path.exists(cache_file):
+            try:
+                with open(cache_file, 'rb') as f:
+                    cache_data = pickle.load(f)
+                    # Vérifier si le cache est encore valide (moins de 5 minutes)
+                    if time.time() - cache_data.get('timestamp', 0) < 300:
+                        print("Résultat de reconnaissance chargé depuis le cache")
+                        return cache_data['result']
+            except Exception as e:
+                print(f"Erreur lors du chargement du cache: {e}")
+
         # Détecter les visages
         detection_results = self.detect_faces(image)
 
@@ -641,6 +709,20 @@ class FaceRecognitionModule:
                 # Trier par confiance (décroissant)
                 matches.sort(key=lambda x: x["confidence"], reverse=True)
                 detection_results["faces"][i]["matches"] = matches
+
+        # Sauvegarder le résultat dans le cache sur disque
+        try:
+            image_hash = hashlib.md5(image.tobytes()).hexdigest()
+            cache_file = os.path.join(self.cache_dir, f"recognition_{image_hash}.pkl")
+
+            with open(cache_file, 'wb') as f:
+                cache_data = {
+                    'result': detection_results,
+                    'timestamp': time.time()
+                }
+                pickle.dump(cache_data, f)
+        except Exception as e:
+            print(f"Erreur lors de la sauvegarde du cache: {e}")
         else:
             # Utiliser OpenCV pour la reconnaissance
             if not self.model_trained:
